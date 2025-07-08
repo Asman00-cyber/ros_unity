@@ -1,0 +1,86 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects\\BME 2025\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7EFADD86-CDF1-BD07-D69E-06FD59E2E3E8}|Assembly-CSharp.csproj|D:\\Projects\\BME 2025\\assets\\scripts\\int32subscriber_rossharp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EFADD86-CDF1-BD07-D69E-06FD59E2E3E8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\int32subscriber_rossharp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EFADD86-CDF1-BD07-D69E-06FD59E2E3E8}|Assembly-CSharp.csproj|d:\\projects\\bme 2025\\assets\\scripts\\dragmovealongnormal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EFADD86-CDF1-BD07-D69E-06FD59E2E3E8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dragmovealongnormal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EFADD86-CDF1-BD07-D69E-06FD59E2E3E8}|Assembly-CSharp.csproj|D:\\Projects\\BME 2025\\assets\\scripts\\dicomsliceviewer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EFADD86-CDF1-BD07-D69E-06FD59E2E3E8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dicomsliceviewer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EFADD86-CDF1-BD07-D69E-06FD59E2E3E8}|Assembly-CSharp.csproj|D:\\Projects\\BME 2025\\assets\\scripts\\freelookmover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EFADD86-CDF1-BD07-D69E-06FD59E2E3E8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\freelookmover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Int32Subscriber_ROSSharp.cs",
+              "DocumentMoniker": "D:\\Projects\\BME 2025\\Assets\\Scripts\\Int32Subscriber_ROSSharp.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Int32Subscriber_ROSSharp.cs",
+              "ToolTip": "D:\\Projects\\BME 2025\\Assets\\Scripts\\Int32Subscriber_ROSSharp.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Int32Subscriber_ROSSharp.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAowFsAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T14:02:43.442Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FreeLookMover.cs",
+              "DocumentMoniker": "D:\\Projects\\BME 2025\\Assets\\Scripts\\FreeLookMover.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\FreeLookMover.cs",
+              "ToolTip": "D:\\Projects\\BME 2025\\Assets\\Scripts\\FreeLookMover.cs",
+              "RelativeToolTip": "Assets\\Scripts\\FreeLookMover.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAYwF4AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T13:34:30.301Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DragMoveAlongNormal.cs",
+              "DocumentMoniker": "D:\\Projects\\BME 2025\\Assets\\Scripts\\DragMoveAlongNormal.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DragMoveAlongNormal.cs",
+              "ToolTip": "D:\\Projects\\BME 2025\\Assets\\Scripts\\DragMoveAlongNormal.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DragMoveAlongNormal.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T12:21:40.845Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DicomSliceViewer.cs",
+              "DocumentMoniker": "D:\\Projects\\BME 2025\\Assets\\Scripts\\DicomSliceViewer.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DicomSliceViewer.cs",
+              "ToolTip": "D:\\Projects\\BME 2025\\Assets\\Scripts\\DicomSliceViewer.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DicomSliceViewer.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAQwC0AAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T10:41:23.414Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
