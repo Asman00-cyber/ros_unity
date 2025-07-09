@@ -32,6 +32,7 @@ services:
     ports:
     - "3001:3000"
     - "3002:8888"
+    - "10000:10000"
     volumes:
     - ./scripts/receiver.py:/workspace/src/receiver/scripts/receiver.py
     environment:
