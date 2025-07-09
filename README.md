@@ -123,7 +123,7 @@ rospack find ros\_tcp\_endpoint
 
 
 
-Step 5: Open the three terminals
+Step 5: Open three terminals
 
 
 
@@ -147,7 +147,9 @@ source /workspace/devel/setup.bash
 
 
 
-roslaunch ros\_tcp\_endpoint endpoint.launch tcp\_ip:=127.0.0.1 tcp\_port:=10000
+roslaunch ros\_tcp\_endpoint endpoint.launch tcp\_ip:=0.0.0.0 tcp\_port:=10000
+
+
 
 
 
@@ -177,7 +179,9 @@ I made a receiver.py python code in order to set the Ros as a server and acquire
 
 IMPORTANT: in order to start the whole communication process you first need to run the Ros side and then the Unity side.
 
+In the Unity side make sure that in the ROSConnector game object ip address is set to:127.0.0.1 and the port is set to:10000
 
+Then press play on the Unity side and get the three coordinates by clicking
 
 
 
