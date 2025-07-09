@@ -4,7 +4,7 @@
 
 ## Unity side:
 
-You need to install the ROS TCP Connector package from Unity-Technologies!
+You need to install the ROS TCP Connector package from Unity-Technologies!(If not in package manager)
 
 
 
@@ -86,7 +86,8 @@ Step 3: Now the server is running on your docker desktop. Click on the left side
 
 
 
-Step 4: Install the ros-tcp-endpoint package from Unity -Technologies by following this series of commands:
+Step 4(If the ROS-TCP-ENDPOINT is visible on src skip this step) Install the ros-tcp-endpoint package from Unity -Technologies by following this series of commands:
+
 
 
 cd /workspace/src
@@ -182,6 +183,4 @@ IMPORTANT: in order to start the whole communication process you first need to r
 In the Unity side make sure that in the ROSConnector game object ip address is set to:127.0.0.1 and the port is set to:10000
 
 Then press play on the Unity side and get the three coordinates by clicking
-
-
 
