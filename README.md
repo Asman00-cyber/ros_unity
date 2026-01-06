@@ -1,489 +1,97 @@
-"# ROS-Unity Communication"
+ROS-Unity Communication
+This project facilitates communication between a Unity-based UI and a ROS Noetic server using the ROS TCP Connector.
 
-<<<<<<< HEAD
+Unity Side
+Installation
+You need to install the ROS TCP Connector package from Unity-Technologies via the Unity Package Manager.
 
+Scene Setup
+I created three game objects in the hierarchy:
 
-=======
->>>>>>> 61b9f88 (Final version of the ROSbridge communication)
-## Unity side:
+RosConnector: Contains the ROSConnection script responsible for binding to the ROS Noetic server.
 
+IP Address: 127.0.0.1
 
+Port: 10000
 
-You need to install the ROS TCP Connector package from Unity-Technologies!(If not in package manager)
+Publish: Contains a custom script CoordinatesPublisher.cs. This is responsible for sending point coordinates derived from clicked DICOM images.
 
+ReceiveTrajectory: Contains a script responsible for receiving planned trajectories back from ROS.
 
+Script Modifications (BiopsyClickManager.cs)
+The following additions were made to the BiopsyClickManager class:
 
-<<<<<<< HEAD
-I created two game objects one named Publish and the other called RosConnector
-=======
-I created three game objects named Publish,RosConnector and ReceiveTrajectory
->>>>>>> 61b9f88 (Final version of the ROSbridge communication)
+Variables:
 
-
-
--> Ros Connector contains the ROSConnection script from the ROS TCP Connector package responsible for binding to the ROS noetic server.The ip address is set to 127.0.0.1 and the port to 10000
-
-
-
--> Publish object contains a script made from scratch called CoordinatesPublisher.cs which is responsible for sending points msg coordinates from the clicked points of the DICOM images
-
-
-<<<<<<< HEAD
-=======
-->ReceiveTrajectory contains a script which is responsible for receiving the planned trajectories from ROS.
-
-
->>>>>>> 61b9f88 (Final version of the ROSbridge communication)
-
--> On the BiopsyClickManager.cs:
-
-inside the BiopsyClickManager class i added:
+C#
 
 public CoordinatesPublisher coordinatesPublisher; 
+public Vector3? xClick; // Changed from private to public
+public Vector3? yClick; // Changed from private to public
+public Vector3? zClick; // Changed from private to public
+Functions: The PublishPointsToROS() function was added after DrawLine() and is called within the Update() function:
 
-public Vector3? xClick; //  changed from private to public
+C#
 
-public Vector3? yClick; //  changed from private to public
+void PublishPointsToROS()
+{
+    if (coordinatesPublisher != null)
+    {
+        coordinatesPublisher.PublishPoints();
+        Debug.Log("Points published to ROS!");
+    }
+    else
+    {
+        Debug.LogWarning("Coordinates publisher not set!");
+    }
+}
+ROS Side
+Setup Instructions
+Open VS Code: Open the folder ros/ros-devcontainer-vscode from this repository.
 
-public Vector3? zClick; //  changed from private to public
+Docker: Open Docker Desktop.
 
+Launch Container: In the terminal, run: docker compose up.
 
+Attach Container: In VS Code, click "Attach to an existing container" and select workspace-1.
 
+Install ROS-TCP-ENDPOINT: (Skip if already in src)
 
-
-I also included after the DrawLine function this function to send the messages over to ROS:
-
-  void PublishPointsToROS()
-
-   {
-
-       if (coordinatesPublisher != null)
-
-       {
-
-           coordinatesPublisher.PublishPoints();
-
-           Debug.Log("Points published to ROS!");
-
-       }
-
-       else
-
-       {
-
-           Debug.LogWarning("Coordinates publisher not set!");
-
-       }
-
-   }
-
-then i called this function to the update function.
-
-
-
-
-## ROS side:
-
-
-
-Step 1: Open VS code and open the folder ros/ros-devcontainer-vscode  of this repository.
-
-
-
-
-
-Step 2: Open Docker desktop
-
-
-
-
-
-Step 3: Then on the terminal type: docker compose up
-
-
-
-
-
-
-
-Step 4: Now the server is running on your docker desktop. Click on the left side of VS code and click Attach to an existing container and choose the workspace-1 devcontainer
-
-
-
-
-
-
-
-Step 5: (If the ROS-TCP-ENDPOINT is visible on src skip this step) Install the ros-tcp-endpoint package from Unity -Technologies by following this series of commands:
-
+Bash
 
 cd /workspace/src
-
-
-
 git clone https://github.com/Unity-Technologies/ROS-TCP-Endpoint.git
-
-
-
 cd /workspace
-
-
-
 rosdep update
-
-
-
 rosdep install --from-paths src --ignore-src -r -y
-
-
-
-catkin\_make
-
-
-
+catkin_make
 source devel/setup.bash
+rospack find ros_tcp_endpoint
+Receiver Script: A receiver.py script (located in /src/scripts) acts as the server to acquire coordinates from Unity and sends planned trajectories from MoveIT back to the Unity UI.
 
+Execution
+Open three separate terminals and run the following:
 
+Terminal 1 (Master):
 
-rospack find ros\_tcp\_endpoint
-
-
-
-
-<<<<<<< HEAD
-Step 6:I made a receiver.py python code in order to set the Ros as a server and acquire the x,y,z coordinates clicked from Unity
-=======
-Step 6:I made a receiver.py python code in order to set the Ros as a server and acquire the x,y,z coordinates clicked from Unity.This scipt is also responsible for sending back the planned trajectories from MoveIT to the Unity UI.
->>>>>>> 61b9f88 (Final version of the ROSbridge communication)
-
-This code is stored inside the /src/scripts folder in the workspace!
-
-
-
-<<<<<<< HEAD
-#!/usr/bin/env python3
-
-import rospy
-
-from geometry_msgs.msg import Point
-
-import json 
-
-import os
-
-
-
-json\_entry\_coordinates = \[]
-
-json\_target\_coordinates = \[]
-
-entry\_file\_path = "/workspace/src/entry\_coordinates.json"
-
-target\_file\_path = "/workspace/src/target\_coordinates.json"
-
-combined\_file\_path = "/workspace/src/all\_coordinates.json"
-
-
-
-def entry\_point\_callback(msg):
-
-&nbsp;   global json\_entry\_coordinates
-
-&nbsp;   rospy.loginfo("received entry point from Unity:")
-
-&nbsp;   rospy.loginfo("X: %.2f, Y: %.2f, Z: %.2f", msg.x, msg.y, msg.z)
-
-&nbsp;   print(f"ENTRY point -> X: {msg.x:.2f}, Y: {msg.y:.2f}, Z: {msg.z:.2f}")
-
-
-
-&nbsp;   entry\_coordinate\_array = \[
-
-&nbsp;       float(msg.x),
-
-&nbsp;       float(msg.y),
-
-&nbsp;       float(msg.z)
-
-&nbsp;   ]
-
-&nbsp;   json\_entry\_coordinates.append(entry\_coordinate\_array)
-
-
-
-&nbsp;   save\_entry\_to\_json()
-
-&nbsp;   save\_combined\_json()
-
-
-
-def target\_point\_callback(msg):
-
-&nbsp;   global json\_target\_coordinates
-
-&nbsp;   rospy.loginfo("received target point from Unity:")
-
-&nbsp;   rospy.loginfo("X: %.2f, Y: %.2f, Z: %.2f", msg.x, msg.y, msg.z)
-
-&nbsp;   print(f"TARGET point -> X: {msg.x:.2f}, Y: {msg.y:.2f}, Z: {msg.z:.2f}")
-
-
-
-&nbsp;   target\_coordinate\_array = \[
-
-&nbsp;       float(msg.x),
-
-&nbsp;       float(msg.y),
-
-&nbsp;       float(msg.z)
-
-&nbsp;   ]
-
-&nbsp;   json\_target\_coordinates.append(target\_coordinate\_array)
-
-
-
-&nbsp;   save\_target\_to\_json()
-
-&nbsp;   save\_combined\_json()
-
-
-
-def save\_entry\_to\_json():
-
-&nbsp;   try:
-
-&nbsp;       with open(entry\_file\_path, 'w') as f:
-
-&nbsp;           json.dump(json\_entry\_coordinates, f, indent=2)
-
-&nbsp;       print(f"Entry coordinates saved to {entry\_file\_path}")
-
-&nbsp;       print(f"Total entry points: {len(json\_entry\_coordinates)}")
-
-&nbsp;   except Exception as e:
-
-&nbsp;       rospy.logerr(f"Error saving entry coordinates to JSON: {e}")
-
-
-
-def save\_target\_to\_json():
-
-&nbsp;   try:
-
-&nbsp;       with open(target\_file\_path, 'w') as f:
-
-&nbsp;           json.dump(json\_target\_coordinates, f, indent=2)
-
-&nbsp;       print(f"Target coordinates saved to {target\_file\_path}")
-
-&nbsp;       print(f"Total target points: {len(json\_target\_coordinates)}")
-
-&nbsp;   except Exception as e:
-
-&nbsp;       rospy.logerr(f"Error saving target coordinates to JSON: {e}")
-
-
-
-def save\_combined\_json():
-
-&nbsp;   try:
-
-&nbsp;       combined\_data = {
-
-&nbsp;           "entry\_coordinates": json\_entry\_coordinates,
-
-&nbsp;           "target\_coordinates": json\_target\_coordinates
-
-&nbsp;       }
-
-&nbsp;       with open(combined\_file\_path, 'w') as f:
-
-&nbsp;           json.dump(combined\_data, f, indent=2)
-
-&nbsp;       print(f"Combined coordinates saved to {combined\_file\_path}")
-
-&nbsp;       
-
-&nbsp;       # Check if we have both entry and target points for biopsy planning
-
-&nbsp;       if len(json\_entry\_coordinates) >= 1 and len(json\_target\_coordinates) >= 1:
-
-&nbsp;           print("✓ Ready for biopsy planning! Have entry and target points")
-
-&nbsp;       
-
-&nbsp;   except Exception as e:
-
-&nbsp;       rospy.logerr(f"Error saving combined coordinates: {e}")
-
-
-
-def listener():
-
-&nbsp;   rospy.init\_node('coordinate\_listener', anonymous=True)
-
-&nbsp;   
-
-&nbsp;   # Subscribe to both entry and target point topics
-
-&nbsp;   rospy.Subscriber('/entry\_point', Point, entry\_point\_callback)
-
-&nbsp;   rospy.Subscriber('/target\_point', Point, target\_point\_callback)
-
-&nbsp;   
-
-&nbsp;   rospy.loginfo("Coordinate listener started. Waiting for Unity coordinates...")
-
-&nbsp;   print("=== ROS Coordinate Listener Active ===")
-
-&nbsp;   print("Listening for:")
-
-&nbsp;   print("  - Entry points on: /entry\_point")
-
-&nbsp;   print("  - Target points on: /target\_point")
-
-&nbsp;   print("Waiting for Unity to send data...")
-
-&nbsp;   
-
-&nbsp;   rospy.spin()
-
-
-
-if \_\_name\_\_ == '\_\_main\_\_':
-
-&nbsp;   try:
-
-&nbsp;       listener()
-
-&nbsp;   except rospy.ROSInterruptException:
-
-&nbsp;       rospy.loginfo("Coordinate listener node terminated.")
-
-&nbsp;       print("Coordinate listener stopped.")
-
-
-
-
-
-Step 7: Open three terminals
-
-
-
-
-
-
-
-Terminal 1:
-
-
-
-
-
-
+Bash
 
 source /opt/ros/noetic/setup.bash
-
-
-
-
-
-
-
 roscore
+Terminal 2 (Endpoint):
 
+Bash
 
-
-
-
-
-
-Terminal 2:
-
-
-
-
-
-=======
-Step 7: Open three terminals
-
-
-Terminal 1:
-
-source /opt/ros/noetic/setup.bash
-
-roscore
-
-
-Terminal 2:
-
->>>>>>> 61b9f88 (Final version of the ROSbridge communication)
 source /workspace/devel/setup.bash
-
-
 roslaunch ros_tcp_endpoint endpoint.launch tcp_ip:=0.0.0.0 tcp_port:=10000
+Terminal 3 (Receiver):
 
-
-<<<<<<< HEAD
-
-
-
-
-
-Terminal 3:
-
-
-
+Bash
 
 source /workspace/devel/setup.bash
-
-
-
 cd /workspace/src/scripts
-
-
-
-=======
-Terminal 3:
-
-source /workspace/devel/setup.bash
-
-cd /workspace/src/scripts
-
->>>>>>> 61b9f88 (Final version of the ROSbridge communication)
 python3 receiver.py
+Important Configuration Notes
+Startup Order: For the process to work properly, you must start the ROS side first, followed by the Unity side.
 
-
-
-<<<<<<< HEAD
-
-
-
-
-IMPORTANT: In order for the whole process to work properly , first you need to run the ROS side and then the Unity side.
-
-Also inside the docker-compose.yml file of the ros-devcontainer-vscode folder you need to navigate to workspace section. Then on the port section you need to add 10000:10000 on the ports.
-=======
-IMPORTANT: In order for the whole process to work properly , first you need to run the ROS side and then the Unity side.
-
->>>>>>> 61b9f88 (Final version of the ROSbridge communication)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Port Forwarding: In the docker-compose.yml file within the ros-devcontainer-vscode folder, ensure the ports section under workspace includes 10000:10000.
